@@ -37,7 +37,6 @@ public class ConfigLoader {
 						"    - com.catand.catandBOT.plugin.ImagePlugin #查头像插件\n" +
 						"    - com.catand.catandBOT.plugin.HelpPlugin #指令菜单插件\n" +
 						"    - com.catand.catandBOT.plugin.SearchQQNumberPlugin #@查询QQ号插件\n"+
-						"    - com.catand.catandBOT.plugin.TestPlugin #@测试功能插件\n"+
 						"#在需要关闭的插件前面加上\"#\"");
 				bos.flush();
 				bos.close();
