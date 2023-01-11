@@ -7,6 +7,9 @@
 #    - com.catand.catandBOT.plugin.LogPlugin #控制台日志插件
 #    - com.catand.catandBOT.plugin.CatandPlugin #大部分基础功能插件
 #    - com.catand.catandBOT.plugin.SPDNet.SPDNetRegisterPlugin #SPDNet相关插件,一般情况下没用
+#    - com.catand.catandBOT.plugin.BeautifulPicturePlugin #美图插件
 #    - com.catand.catandBOT.plugin.ImagePlugin #查头像插件
 #    - com.catand.catandBOT.plugin.HelpPlugin #指令菜单插件
 #    - com.catand.catandBOT.plugin.SearchQQNumberPlugin #@查询QQ号插件
+#    - com.catand.catandBOT.plugin.MathAutoReplyPlugin
+#    - com.catand.catandBOT.plugin.TestPlugin #@测试功能插件

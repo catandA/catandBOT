@@ -52,11 +52,18 @@ public class CatandPlugin extends BotPlugin {
 			bot.sendGroupMsg(event.getGroupId(), sendMsg.build(), false);
 		}
 		if (messageRaw.contains("贴贴")) {
-			sendMsg = MsgUtils.builder().at(event.getUserId()).text("贴贴").img("https://gchat.qpic.cn/gchatpic_new/3047354896/696421551-2283744490-F0F7B1AE168B0FDA40E9A27362C9462C/0?term=3");
+			sendMsg = MsgUtils.builder().at(event.getUserId()).text("贴贴").img("https://gchat.qpic.cn/gchatpic_new/0/0-0-F0F7B1AE168B0FDA40E9A27362C9462C/0?term=0");
+			bot.sendGroupMsg(event.getGroupId(), sendMsg.build(), false);
+		}if (messageRaw.contains("咕咕")||messageRaw.contains("鸽子")) {
+			sendMsg = MsgUtils.builder().at(event.getUserId()).text("咕咕");
+			bot.sendGroupMsg(event.getGroupId(), sendMsg.build(), false);
+		}
+		if (messageRaw.contains("涩涩")) {
+			sendMsg = MsgUtils.builder().at(event.getUserId()).text("好哦,走,进屋").img("https://gchat.qpic.cn/gchatpic_new/0/0-0-611D8F347FCA9982F3C913B9F5646FE1/0?term=0");
 			bot.sendGroupMsg(event.getGroupId(), sendMsg.build(), false);
 		}
 		if (messageRaw.contains("片片")) {
-			sendMsg = MsgUtils.builder().video("https://vdse.bdstatic.com//192d9a98d782d9c74c96f09db9378d93.mp4", "https://gchat.qpic.cn/gchatpic_new/3047354896/696421551-2992631064-ECC25F593B968FAB2B1A056B98C48836/0?term=3");
+			sendMsg = MsgUtils.builder().video("https://vdse.bdstatic.com//192d9a98d782d9c74c96f09db9378d93.mp4", "https://gchat.qpic.cn/gchatpic_new/0/0-0-F0F7B1AE168B0FDA40E9A27362C9462C/0?term=0");
 			bot.sendGroupMsg(event.getGroupId(), sendMsg.build(), false);
 		}
 		List<MsgChainBean> messageChain = (event.getArrayMsg());
@@ -65,9 +72,11 @@ public class CatandPlugin extends BotPlugin {
 			if ("at".equals(message.getType())) {
 				String qq = message.getData().get("qq");
 				if (Objects.equals(qq, String.valueOf(bot.getSelfId()))) {
+					if (messageRaw.contains("老婆")||messageRaw.contains("亲")||messageRaw.contains("爱")) {
+                    }
 					long q;
 					q = event.getUserId();
-					sendMsg = MsgUtils.builder().at(q).text("贴贴").img("https://gchat.qpic.cn/gchatpic_new/3047354896/696421551-2283744490-F0F7B1AE168B0FDA40E9A27362C9462C/0?term=3");
+					sendMsg = MsgUtils.builder().at(q).text("贴贴").img("https://gchat.qpic.cn/gchatpic_new/0/0-0-F0F7B1AE168B0FDA40E9A27362C9462C/0?term=0");
 					bot.sendGroupMsg(event.getGroupId(), sendMsg.build(), false);
 				}
 			}

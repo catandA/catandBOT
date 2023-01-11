@@ -16,6 +16,7 @@ public class ConfigLoader {
 		String path = System.getProperty("java.class.path");
 		int lastIndex = path.lastIndexOf(File.separator) + 1;
 		path = path.substring(0, lastIndex);
+
 		//检验application.yml
 		APPLICATION = new File(path + "application.yml");
 		if (!APPLICATION.exists()) {
@@ -31,10 +32,12 @@ public class ConfigLoader {
 						"  plugin-list:\n" +
 						"    - com.catand.catandBOT.plugin.LogPlugin #控制台日志插件\n" +
 						"    - com.catand.catandBOT.plugin.CatandPlugin #大部分基础功能插件\n" +
-						"    #- com.catand.catandBOT.plugin.SPDNet.SPDNetRegisterPlugin #SPDNet相关插件,一般情况下没用\n" +
+						"    - com.catand.catandBOT.plugin.SPDNet.SPDNetRegisterPlugin #SPDNet相关插件,一般情况下没用\n" +
+						"    - com.catand.catandBOT.plugin.BeautifulPicturePlugin #美图插件\n" +
 						"    - com.catand.catandBOT.plugin.ImagePlugin #查头像插件\n" +
 						"    - com.catand.catandBOT.plugin.HelpPlugin #指令菜单插件\n" +
 						"    - com.catand.catandBOT.plugin.SearchQQNumberPlugin #@查询QQ号插件\n"+
+						"    - com.catand.catandBOT.plugin.TestPlugin #@测试功能插件\n"+
 						"#在需要关闭的插件前面加上\"#\"");
 				bos.flush();
 				bos.close();
@@ -50,6 +53,7 @@ public class ConfigLoader {
 			}
 			CatandBotApplication.exitApplication();
 		}
+
 	}
 
 
