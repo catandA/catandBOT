@@ -14,9 +14,6 @@ import org.springframework.util.DigestUtils;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
-import java.util.Random;
-
-import static jdk.vm.ci.meta.JavaKind.Char;
 
 @Component
 public class SPDNetRegisterPlugin extends BotPlugin {
@@ -30,15 +27,12 @@ public class SPDNetRegisterPlugin extends BotPlugin {
     //判断是否是中文
     public static boolean isChinese(char c) {
         Character.UnicodeBlock ub = Character.UnicodeBlock.of(c);
-        if (ub == Character.UnicodeBlock.CJK_UNIFIED_IDEOGRAPHS
+        return ub == Character.UnicodeBlock.CJK_UNIFIED_IDEOGRAPHS
                 || ub == Character.UnicodeBlock.CJK_COMPATIBILITY_IDEOGRAPHS
                 || ub == Character.UnicodeBlock.CJK_UNIFIED_IDEOGRAPHS_EXTENSION_A
                 || ub == Character.UnicodeBlock.GENERAL_PUNCTUATION
                 || ub == Character.UnicodeBlock.CJK_SYMBOLS_AND_PUNCTUATION
-                || ub == Character.UnicodeBlock.HALFWIDTH_AND_FULLWIDTH_FORMS) {
-            return true;
-        }
-        return false;
+                || ub == Character.UnicodeBlock.HALFWIDTH_AND_FULLWIDTH_FORMS;
     }
 
     @Override
@@ -59,7 +53,7 @@ public class SPDNetRegisterPlugin extends BotPlugin {
 
 
                 if (name.contains("[CQ:")){
-                    sendMsg = MsgUtils.builder().at(event.getUserId()).text(String.format("\n你这名字有你妈QQ表情包啊,拿表情糊弄人是吧，爬!!!", name));
+                    sendMsg = MsgUtils.builder().at(event.getUserId()).text("\n你这名字有你妈QQ表情包啊,拿表情糊弄人是吧，爬!!!");
                     bot.sendGroupMsg(event.getGroupId(), sendMsg.build(), false);
                     return MESSAGE_IGNORE;
                 }
@@ -86,14 +80,14 @@ public class SPDNetRegisterPlugin extends BotPlugin {
                     for (Account account1 : spdJSON.getAccounts()) {
                         //检查用户名
                         if (account1.getNick().equals(name)) {
-                            sendMsg = MsgUtils.builder().at(event.getUserId()).text(String.format("\n有人抢先一步用了这个用户名了\n换一个用户名注册⑧"));
+                            sendMsg = MsgUtils.builder().at(event.getUserId()).text("\n有人抢先一步用了这个用户名了\n换一个用户名注册⑧");
                             bot.sendGroupMsg(event.getGroupId(), sendMsg.build(), false);
                             return MESSAGE_IGNORE;
                         }
 
                         //检查key
                         else if (account1.getKey().equals(key)) {
-                            sendMsg = MsgUtils.builder().at(event.getUserId()).text(String.format("\n想同QQ注册多个是吧，不许！"));
+                            sendMsg = MsgUtils.builder().at(event.getUserId()).text("\n想同QQ注册多个是吧，不许！");
                             bot.sendGroupMsg(event.getGroupId(), sendMsg.build(), false);
                             return MESSAGE_IGNORE;
                         }
