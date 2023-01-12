@@ -16,12 +16,15 @@ import java.io.File;
 public class SPDNetGetKeyPlugin extends BotPlugin {
 	MsgUtils sendMsg;
 
+
 	//TODO Sever
 	static File file = new File("C:\\spd-server\\spd-server\\server\\data\\config.json");
 
 	@Override
 	public int onPrivateMessage(@NotNull Bot bot, @NotNull PrivateMessageEvent event) {
 		String message = event.getRawMessage().replace("\n", "");
+		//TODO 检查插件
+		System.out.println("test go open!!!");
 		if ("key".equals(message)) {
 
 			String key;
@@ -39,6 +42,7 @@ public class SPDNetGetKeyPlugin extends BotPlugin {
 					//检查key
 					if (account1.getKey().equals(key)) {
 						sendMsg = MsgUtils.builder().text(String.format("你的key是: " + "\n%s", key));
+						bot.sendPrivateMsg(event.getUserId(), sendMsg.build(), false);
 						return MESSAGE_IGNORE;
 					}
 				}

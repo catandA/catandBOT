@@ -16,6 +16,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.util.Random;
 
+import static jdk.vm.ci.meta.JavaKind.Char;
+
 @Component
 public class SPDNetRegisterPlugin extends BotPlugin {
     MsgUtils sendMsg;
@@ -23,6 +25,21 @@ public class SPDNetRegisterPlugin extends BotPlugin {
 
     //TODO Sever
     static File file = new File("C:\\spd-server\\spd-server\\server\\data\\config.json");
+
+
+    //判断是否是中文
+    public static boolean isChinese(char c) {
+        Character.UnicodeBlock ub = Character.UnicodeBlock.of(c);
+        if (ub == Character.UnicodeBlock.CJK_UNIFIED_IDEOGRAPHS
+                || ub == Character.UnicodeBlock.CJK_COMPATIBILITY_IDEOGRAPHS
+                || ub == Character.UnicodeBlock.CJK_UNIFIED_IDEOGRAPHS_EXTENSION_A
+                || ub == Character.UnicodeBlock.GENERAL_PUNCTUATION
+                || ub == Character.UnicodeBlock.CJK_SYMBOLS_AND_PUNCTUATION
+                || ub == Character.UnicodeBlock.HALFWIDTH_AND_FULLWIDTH_FORMS) {
+            return true;
+        }
+        return false;
+    }
 
     @Override
     public int onGroupMessage(@NotNull Bot bot, @NotNull GroupMessageEvent event) {
@@ -40,10 +57,18 @@ public class SPDNetRegisterPlugin extends BotPlugin {
                 key = DigestUtils.md5DigestAsHex(("这是一个加盐前缀:QQ号码:"+event.getUserId()).getBytes()).substring(8, 24);
                 account = new Account(false, false, key, name);
 
+
+                if (name.contains("[CQ:")){
+                    sendMsg = MsgUtils.builder().at(event.getUserId()).text(String.format("\n你这名字有你妈QQ表情包啊,拿表情糊弄人是吧，爬!!!", name));
+                    bot.sendGroupMsg(event.getGroupId(), sendMsg.build(), false);
+                    return MESSAGE_IGNORE;
+                }
+
                 //检查用户名是不是放飞了自我
                 for (char c : name.toCharArray()) {
-                    if (!CharUtil.isAsciiPrintable(c)) {
-                        sendMsg = MsgUtils.builder().at(event.getUserId()).text(String.format("\n你这名字怎么带有非英文字符的\"%c\"啊，快给我换一个", c));
+                    //判断用户名是英文，或者是中文 如果都无法成功 则发送消息
+                    if (!CharUtil.isAsciiPrintable(c) && !isChinese(c)) {
+                        sendMsg = MsgUtils.builder().at(event.getUserId()).text(String.format("\n你这名字有你妈异体字符\"%c\"啊，快给我换!!!", c));
                         bot.sendGroupMsg(event.getGroupId(), sendMsg.build(), false);
                         return MESSAGE_IGNORE;
                     }
