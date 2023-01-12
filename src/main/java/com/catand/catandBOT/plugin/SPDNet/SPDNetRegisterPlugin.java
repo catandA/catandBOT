@@ -9,6 +9,7 @@ import com.mikuac.shiro.core.BotPlugin;
 import com.mikuac.shiro.dto.event.message.GroupMessageEvent;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Component;
+import org.springframework.util.DigestUtils;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -28,29 +29,21 @@ public class SPDNetRegisterPlugin extends BotPlugin {
         String message = event.getRawMessage().replace("\n", "");
         if (message.contains("SPD注册")) {
             int userIndex = message.indexOf("用户名 ");
-            int keyIndex = message.indexOf("key ");
             Account account;
             //如果"用户名 "和"key "存在
-            if (userIndex != -1 && keyIndex != -1) {
+            if (userIndex != -1) {
 
                 //构建待加入Account对象
                 String name;
                 String key;
-                name = message.substring(userIndex + 4, keyIndex);
-                key = message.substring(keyIndex + 4);
+                name = message.substring(userIndex + 4);
+                key = DigestUtils.md5DigestAsHex(("这是一个加盐前缀:QQ号码:"+event.getUserId()).getBytes()).substring(8, 24);
                 account = new Account(false, false, key, name);
 
-                //检查用户名或者密码或者key是不是放飞了自我
+                //检查用户名是不是放飞了自我
                 for (char c : name.toCharArray()) {
                     if (!CharUtil.isAsciiPrintable(c)) {
                         sendMsg = MsgUtils.builder().at(event.getUserId()).text(String.format("\n你这名字怎么带有非英文字符的\"%c\"啊，快给我换一个", c));
-                        bot.sendGroupMsg(event.getGroupId(), sendMsg.build(), false);
-                        return MESSAGE_IGNORE;
-                    }
-                }
-                for (char c : key.toCharArray()) {
-                    if (!CharUtil.isAsciiPrintable(c)) {
-                        sendMsg = MsgUtils.builder().at(event.getUserId()).text(String.format("\n你这密码怎么带有非英文字符的\"%c\"啊，快给我换一个", c));
                         bot.sendGroupMsg(event.getGroupId(), sendMsg.build(), false);
                         return MESSAGE_IGNORE;
                     }
@@ -75,7 +68,7 @@ public class SPDNetRegisterPlugin extends BotPlugin {
 
                         //检查key
                         else if (account1.getKey().equals(key)) {
-                            sendMsg = MsgUtils.builder().at(event.getUserId()).text(String.format("\n有人抢先一步用了这个key了\n换一个key注册⑧"));
+                            sendMsg = MsgUtils.builder().at(event.getUserId()).text(String.format("\n想同QQ注册多个是吧，不许！"));
                             bot.sendGroupMsg(event.getGroupId(), sendMsg.build(), false);
                             return MESSAGE_IGNORE;
                         }
@@ -95,9 +88,9 @@ public class SPDNetRegisterPlugin extends BotPlugin {
                     bot.sendGroupMsg(event.getGroupId(), sendMsg.build(), false);
                     return MESSAGE_BLOCK;
                 }
-                sendMsg = MsgUtils.builder().at(event.getUserId()).text("创建成功!\n用户名:" + name + "\nkey:" + key);
+                sendMsg = MsgUtils.builder().at(event.getUserId()).text("创建成功!\n用户名:" + name + "\n你的key请私聊发送key来查询");
             } else {
-                sendMsg = MsgUtils.builder().at(event.getUserId()).text("语法无效!\n格式:\"SPD注册 用户名 XXX key XXX\"");
+                sendMsg = MsgUtils.builder().at(event.getUserId()).text("语法无效!\n格式:\"SPD注册 用户名 XXX\"");
             }
             bot.sendGroupMsg(event.getGroupId(), sendMsg.build(), false);
         }
