@@ -1,15 +1,15 @@
-#server:
-#  port: 5000
-#shiro:
-#  # 插件列表 (顺序执行，如果前一个插件返回了MESSAGE_BLOCK，将不会执行后续插件)
-#  # 注解方式无需在此定义插件
-#  plugin-list:
-#    - com.catand.catandBOT.plugin.LogPlugin #控制台日志插件
-#    - com.catand.catandBOT.plugin.CatandPlugin #大部分基础功能插件
-#    - com.catand.catandBOT.plugin.SPDNet.SPDNetRegisterPlugin #SPDNet相关插件,一般情况下没用
-#    - com.catand.catandBOT.plugin.BeautifulPicturePlugin #美图插件
-#    - com.catand.catandBOT.plugin.ImagePlugin #查头像插件
-#    - com.catand.catandBOT.plugin.HelpPlugin #指令菜单插件
+server:
+  port: 11454
+shiro:
+  # 插件列表 (顺序执行，如果前一个插件返回了MESSAGE_BLOCK，将不会执行后续插件)
+  # 注解方式无需在此定义插件
+  plugin-list:
+    - com.catand.catandBOT.plugin.LogPlugin #控制台日志插件
+    - com.catand.catandBOT.plugin.CatandPlugin #大部分基础功能插件
+    - com.catand.catandBOT.plugin.SPDNet.SPDNetRegisterPlugin #SPDNet相关插件,一般情况下没用
+    - com.catand.catandBOT.plugin.BeautifulPicturePlugin #美图插件
+    - com.catand.catandBOT.plugin.ImagePlugin #查头像插件
+    - com.catand.catandBOT.plugin.HelpPlugin #指令菜单插件
 #    - com.catand.catandBOT.plugin.SearchQQNumberPlugin #@查询QQ号插件
 #    - com.catand.catandBOT.plugin.MathAutoReplyPlugin
 #    - com.catand.catandBOT.plugin.TestPlugin #@测试功能插件

@@ -37,19 +37,19 @@ public class SPDNetRegisterPlugin extends BotPlugin {
                 String key;
                 name = message.substring(userIndex + 4, keyIndex);
                 key = message.substring(keyIndex + 4);
-                account = new Account(event.getUserId(), false, false, key, name);
+                account = new Account(false, false, key, name);
 
                 //检查用户名或者密码或者key是不是放飞了自我
                 for (char c : name.toCharArray()) {
                     if (!CharUtil.isAsciiPrintable(c)) {
-                        sendMsg = MsgUtils.builder().at(event.getUserId()).text(String.format("\n你这名字怎么带有\"%c\"啊，快给我换一个", c));
+                        sendMsg = MsgUtils.builder().at(event.getUserId()).text(String.format("\n你这名字怎么带有非英文字符的\"%c\"啊，快给我换一个", c));
                         bot.sendGroupMsg(event.getGroupId(), sendMsg.build(), false);
                         return MESSAGE_IGNORE;
                     }
                 }
                 for (char c : key.toCharArray()) {
                     if (!CharUtil.isAsciiPrintable(c)) {
-                        sendMsg = MsgUtils.builder().at(event.getUserId()).text(String.format("\n你这密码怎么带有\"%c\"啊，快给我换一个", c));
+                        sendMsg = MsgUtils.builder().at(event.getUserId()).text(String.format("\n你这密码怎么带有非英文字符的\"%c\"啊，快给我换一个", c));
                         bot.sendGroupMsg(event.getGroupId(), sendMsg.build(), false);
                         return MESSAGE_IGNORE;
                     }
@@ -63,26 +63,18 @@ public class SPDNetRegisterPlugin extends BotPlugin {
                     spdJSON = objectMapper.readValue(file, new TypeReference<SPDJSON>() {
                     });
 
-                    //遍历寻找是否有相同注册者QQ或者相同用户名或者相同key
+                    //遍历寻找是否有相同用户名或者相同key
                     for (Account account1 : spdJSON.getAccounts()) {
-
-                        //检查QQ
-                        if (account1.getQq() == event.getUserId()) {
-                            sendMsg = MsgUtils.builder().at(event.getUserId()).text(String.format("\n已经用这个QQ号注册过一次还要再注册一个的家伙是屑\n你已经注册的用户名是: %s\n密码我不告诉你，你自己猜", account1.getNick()));
-                            bot.sendGroupMsg(event.getGroupId(), sendMsg.build(), false);
-                            return MESSAGE_IGNORE;
-                        }
-
                         //检查用户名
-                        else if (account1.getNick().equals(name)) {
-                            sendMsg = MsgUtils.builder().at(event.getUserId()).text(String.format("\n有人抢先一步用了这个用户名了\n那人的QQ号是: %s\n换一个用户名注册⑧", account1.getQq()));
+                        if (account1.getNick().equals(name)) {
+                            sendMsg = MsgUtils.builder().at(event.getUserId()).text(String.format("\n有人抢先一步用了这个用户名了\n换一个用户名注册⑧"));
                             bot.sendGroupMsg(event.getGroupId(), sendMsg.build(), false);
                             return MESSAGE_IGNORE;
                         }
 
                         //检查key
                         else if (account1.getKey().equals(key)) {
-                            sendMsg = MsgUtils.builder().at(event.getUserId()).text(String.format("\n有人抢先一步用了这个key了\n那人的QQ号是: %s\n换一个key注册⑧", account1.getQq()));
+                            sendMsg = MsgUtils.builder().at(event.getUserId()).text(String.format("\n有人抢先一步用了这个key了\n换一个key注册⑧"));
                             bot.sendGroupMsg(event.getGroupId(), sendMsg.build(), false);
                             return MESSAGE_IGNORE;
                         }

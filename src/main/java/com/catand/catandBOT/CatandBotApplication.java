@@ -9,6 +9,7 @@ import java.lang.management.ManagementFactory;
 @SpringBootApplication
 public class CatandBotApplication {
 	public static void main(String[] args) {
+
 		SpringApplication.run(CatandBotApplication.class, args);
 	}
 	public static void exitApplication() {
