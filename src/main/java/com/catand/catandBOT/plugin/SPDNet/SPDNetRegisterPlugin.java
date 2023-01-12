@@ -19,9 +19,9 @@ import java.util.Random;
 public class SPDNetRegisterPlugin extends BotPlugin {
     MsgUtils sendMsg;
     static BufferedWriter bufferedWriter;
-    
+
     //TODO Sever
-    static File file = new File("C:\\spd-server\\spd-server\\server\\data");
+    static File file = new File("C:\\spd-server\\spd-server\\server\\data\\config.json");
 
     @Override
     public int onGroupMessage(@NotNull Bot bot, @NotNull GroupMessageEvent event) {
