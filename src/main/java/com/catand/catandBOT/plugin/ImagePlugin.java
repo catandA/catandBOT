@@ -1,6 +1,6 @@
 package com.catand.catandBOT.plugin;
 
-import com.mikuac.shiro.bean.MsgChainBean;
+import com.mikuac.shiro.bo.ArrayMsg;
 import com.mikuac.shiro.common.utils.MsgUtils;
 import com.mikuac.shiro.core.Bot;
 import com.mikuac.shiro.core.BotPlugin;
@@ -17,9 +17,9 @@ public class ImagePlugin extends BotPlugin {
 	public int onGroupMessage(@NotNull Bot bot, @NotNull GroupMessageEvent event) {
 		String rawMsg = event.getRawMessage();
 		if (rawMsg.startsWith("头像")) {
-			List<MsgChainBean> messageChain = (event.getArrayMsg());
+			List<ArrayMsg> messageChain = (event.getArrayMsg());
 			if (messageChain.size() > 1 && "at".equals(messageChain.get(1).getType())) {
-				MsgChainBean message = messageChain.get(1);
+				ArrayMsg message = messageChain.get(1);
 				if ("at".equals(message.getType())) {
 					sendMsg = MsgUtils.builder().img("https://q2.qlogo.cn/headimg_dl?dst_uin=" + message.getData().get("qq") + "&spec=5");
 					bot.sendGroupMsg(event.getGroupId(), sendMsg.build(), false);

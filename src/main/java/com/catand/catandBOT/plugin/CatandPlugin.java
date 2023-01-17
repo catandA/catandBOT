@@ -1,6 +1,6 @@
 package com.catand.catandBOT.plugin;
 
-import com.mikuac.shiro.bean.MsgChainBean;
+import com.mikuac.shiro.bo.ArrayMsg;
 import com.mikuac.shiro.common.utils.MsgUtils;
 import com.mikuac.shiro.core.Bot;
 import com.mikuac.shiro.core.BotPlugin;
@@ -32,9 +32,9 @@ public class CatandPlugin extends BotPlugin {
 			}
 		}
 		if (messageRaw.contains("戳")) {
-			List<MsgChainBean> messageChain = (event.getArrayMsg());
+			List<ArrayMsg> messageChain = (event.getArrayMsg());
 			if (messageChain.size() > 1 && "at".equals(messageChain.get(1).getType())) {
-				MsgChainBean message1 = messageChain.get(1);
+				ArrayMsg message1 = messageChain.get(1);
 				if ("at".equals(message1.getType())) {
 					sendMsg = MsgUtils.builder().poke(Long.parseLong(message1.getData().get("qq")));
 					bot.sendGroupMsg(event.getGroupId(), sendMsg.build(), false);
@@ -66,9 +66,9 @@ public class CatandPlugin extends BotPlugin {
 			sendMsg = MsgUtils.builder().video("https://vdse.bdstatic.com//192d9a98d782d9c74c96f09db9378d93.mp4", "https://gchat.qpic.cn/gchatpic_new/0/0-0-F0F7B1AE168B0FDA40E9A27362C9462C/0?term=0");
 			bot.sendGroupMsg(event.getGroupId(), sendMsg.build(), false);
 		}
-		List<MsgChainBean> messageChain = (event.getArrayMsg());
+		List<ArrayMsg> messageChain = (event.getArrayMsg());
 		if (messageChain.size() > 0) {
-			MsgChainBean message = messageChain.get(0);
+			ArrayMsg message = messageChain.get(0);
 			if ("at".equals(message.getType())) {
 				String qq = message.getData().get("qq");
 				if (Objects.equals(qq, String.valueOf(bot.getSelfId()))) {
