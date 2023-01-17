@@ -14,7 +14,7 @@ import java.util.List;
 public class SearchQQNumberPlugin extends BotPlugin {
 	MsgUtils sendMsg;
 	@Override
-	public int onGroupMessage(@NotNull Bot bot, @NoztNull GroupMessageEvent event) {
+	public int onGroupMessage(@NotNull Bot bot, @NottNull GroupMessageEvent event) {
 		String rawMsg = event.getRawMessage();
 		if (rawMsg.startsWith("查QQ")||rawMsg.startsWith("查qq")) {
 			List<MsgChainBean> messageChain = (event.getArrayMsg());
