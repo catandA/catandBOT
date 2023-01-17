@@ -1,6 +1,5 @@
 package com.catand.catandBOT.plugin.SPDNet;
 
-import cn.hutool.core.util.CharUtil;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mikuac.shiro.common.utils.MsgUtils;
@@ -49,7 +48,7 @@ public class SPDNetRegisterPlugin extends BotPlugin {
                 String key;
                 name = message.substring(userIndex + 4);
                 key = DigestUtils.md5DigestAsHex(("这是一个加盐前缀:QQ号码:"+event.getUserId()).getBytes()).substring(8, 24);
-                account = new Account(false, false, key, name);
+                account = new Account(false, false, key, name,false);
 
 
                 if (name.contains("[CQ:")){
@@ -58,15 +57,15 @@ public class SPDNetRegisterPlugin extends BotPlugin {
                     return MESSAGE_IGNORE;
                 }
 
-                //检查用户名是不是放飞了自我
-                for (char c : name.toCharArray()) {
-                    //判断用户名是英文，或者是中文 如果都无法成功 则发送消息
-                    if (!CharUtil.isAsciiPrintable(c) && !isChinese(c)) {
-                        sendMsg = MsgUtils.builder().at(event.getUserId()).text(String.format("\n你这名字有你妈异体字符\"%c\"啊，快给我换!!!", c));
-                        bot.sendGroupMsg(event.getGroupId(), sendMsg.build(), false);
-                        return MESSAGE_IGNORE;
-                    }
-                }
+//                //检查用户名是不是放飞了自我
+//                for (char c : name.toCharArray()) {
+//                    //判断用户名是英文，或者是中文 如果都无法成功 则发送消息
+//                    if (!CharUtil.isAsciiPrintable(c) && !isChinese(c)) {
+//                        sendMsg = MsgUtils.builder().at(event.getUserId()).text(String.format("\n你这名字有你妈异体字符\"%c\"啊，快给我换!!!", c));
+//                        bot.sendGroupMsg(event.getGroupId(), sendMsg.build(), false);
+//                        return MESSAGE_IGNORE;
+//                    }
+//                }
 
                 try {
 
@@ -107,7 +106,7 @@ public class SPDNetRegisterPlugin extends BotPlugin {
                     bot.sendGroupMsg(event.getGroupId(), sendMsg.build(), false);
                     return MESSAGE_BLOCK;
                 }
-                sendMsg = MsgUtils.builder().at(event.getUserId()).text("创建成功!\n用户名:" + name + "\n你的key请私聊发送key来查询");
+                sendMsg = MsgUtils.builder().at(event.getUserId()).text("创建成功!\n用户名:" + name + "\n你的key请加我好友私聊发送key来查询");
             } else {
                 sendMsg = MsgUtils.builder().at(event.getUserId()).text("语法无效!\n格式:\"SPD注册 用户名 XXX\"");
             }
