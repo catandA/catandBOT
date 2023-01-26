@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.catand</groupId>
     <artifactId>catandBOT</artifactId>
-    <version>1.0.4-INDEV</version>
+    <version>1.0.5-INDEV</version>
     <name>catandBOT</name>
     <description>catandBOT</description>
 
@@ -52,6 +52,12 @@
             <artifactId>shiro</artifactId>
             <version>1.4.4</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <!--<scope>provided</scope>-->
+        </dependency>
+
         <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>

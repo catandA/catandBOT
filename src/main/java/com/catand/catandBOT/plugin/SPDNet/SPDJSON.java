@@ -9,6 +9,7 @@ public class SPDJSON {
 	public SPDJSON() {
 	}
 
+
 	public SPDJSON(int port, String roomprefix, long seed,int SPDMinVersion, int NETMinVersion,int assetVersion, boolean itemSharing, String motd, List<Account> accounts) {
 		this.port = port;
 		this.roomprefix = roomprefix;
@@ -24,6 +25,7 @@ public class SPDJSON {
 	private int port;
 	private String roomprefix;
 	private long seed;
+
 	private int SPDMinVersion;
 	private int NETMinVersion;
 	private int assetVersion;

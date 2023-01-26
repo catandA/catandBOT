@@ -20,7 +20,7 @@ public class SPDNetRegisterPlugin extends BotPlugin {
     static BufferedWriter bufferedWriter;
 
     //TODO Sever
-    static File file = new File("C:\\spd-server\\spd-server\\server\\data\\config.json");
+    static File file = new File("C:\\spd-server-ling\\server\\data\\config.json");
 
 
     //判断是否是中文

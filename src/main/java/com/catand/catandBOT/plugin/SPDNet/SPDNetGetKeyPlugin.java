@@ -18,7 +18,7 @@ public class SPDNetGetKeyPlugin extends BotPlugin {
 
 
 	//TODO Sever
-	static File file = new File("C:\\spd-server\\spd-server\\server\\data\\config.json");
+	static File file = new File("C:\\spd-server-ling\\server\\data\\config.json");
 
 	@Override
 	public int onPrivateMessage(@NotNull Bot bot, @NotNull PrivateMessageEvent event) {
