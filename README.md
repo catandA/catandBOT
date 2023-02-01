@@ -25,6 +25,7 @@
 - SPDNET相关操作:
     - 用户注册
     - 更换服务器种子
+    - SPDNET-Key发送邮件(尚未实装)
 
 ## 相关链接
 
@@ -39,4 +40,8 @@ This product is licensed under the GNU General Public License version 3. The lic
 Alternatively, this product is licensed under the GNU Lesser General Public License version 3 for non-commercial use. The license is as published by the Free Software Foundation published at [https://www.gnu.org/licenses/lgpl-3.0.html](https://www.gnu.org/licenses/lgpl-3.0.html).
 
 Feel free to contact us if you have any questions about licensing or want to use the library in a commercial closed source product.
+
+# Project-Status
+![](https://img.shields.io/github/repo-size/catandA/catandBOT?color=%23F8BBD0)
+![](https://img.shields.io/github/release/catandA/catandBOT?color=%235C6BC0&label=Release)
 
