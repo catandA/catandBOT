@@ -16,7 +16,7 @@ import java.io.File;
 @Component
 public class SPDNetGetKeyPlugin extends BotPlugin {
 	MsgUtils sendMsg;
-	static MailSender mailSender = new MailSender("2735951230@qq.com","2735951230@qq.com","ezjsbsgmgteadgjj","smtp.qq.com");
+	static MailSender mailSender = new MailSender("clingsd@gmail.com","clingsd@gmail.com","dgpgueqscytwcmem","smtp.gmail.com");
 
 	//TODO Sever
 	static File file = new File("C:\\spd-server-ling\\server\\data\\config.json");

@@ -10,19 +10,15 @@ import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Component;
 import org.springframework.util.DigestUtils;
 
-import javax.mail.*;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
-import java.util.Properties;
 
 @Component
 public class SPDNetRegisterPlugin extends BotPlugin {
 	MsgUtils sendMsg;
 	BufferedWriter bufferedWriter;
-	static MailSender mailSender = new MailSender("2735951230@qq.com","2735951230@qq.com","ezjsbsgmgteadgjj","smtp.qq.com");
+	static MailSender mailSender = new MailSender("clingsd@gmail.com","clingsd@gmail.com","dgpgueqscytwcmem","smtp.gmail.com");
 
 	//TODO Sever
 	static File file = new File("C:\\spd-server-ling\\server\\data\\config.json");

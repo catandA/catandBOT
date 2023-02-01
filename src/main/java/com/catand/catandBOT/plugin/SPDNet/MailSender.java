@@ -32,10 +32,10 @@ public class MailSender {
 	}
 
 	public void sendMail(String recipientMailAddress, String mailSubject, String mailContent) throws Exception {
-		// 使用QQ邮箱时配置
+		// 使用Gmail邮箱时配置
 		Properties prop = new Properties();
-		// 设置QQ邮件服务器
-		prop.setProperty("mail.host", "smtp.qq.com");
+		// 设置Gmail邮件服务器
+		prop.setProperty("mail.host", "smtp.gmail.com");
 		// 邮件发送协议
 		prop.setProperty("mail.transport.protocol", "smtp");
 		// 需要验证用户名和密码
