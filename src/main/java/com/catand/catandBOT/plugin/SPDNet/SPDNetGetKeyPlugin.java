@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mikuac.shiro.common.utils.MsgUtils;
 import com.mikuac.shiro.core.Bot;
 import com.mikuac.shiro.core.BotPlugin;
+import com.mikuac.shiro.dto.event.message.GroupMessageEvent;
 import com.mikuac.shiro.dto.event.message.PrivateMessageEvent;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Component;
@@ -15,7 +16,7 @@ import java.io.File;
 @Component
 public class SPDNetGetKeyPlugin extends BotPlugin {
 	MsgUtils sendMsg;
-
+	static MailSender mailSender = new MailSender("2735951230@qq.com","2735951230@qq.com","ezjsbsgmgteadgjj","smtp.qq.com");
 
 	//TODO Sever
 	static File file = new File("C:\\spd-server-ling\\server\\data\\config.json");
@@ -24,8 +25,7 @@ public class SPDNetGetKeyPlugin extends BotPlugin {
 	public int onPrivateMessage(@NotNull Bot bot, @NotNull PrivateMessageEvent event) {
 		String message = event.getRawMessage().replace("\n", "");
 		//TODO 检查插件
-		System.out.println("test go open!!!");
-		if ("key".equals(message)) {
+		if ("key查询".equals(message)) {
 
 			String key;
 			key = DigestUtils.md5DigestAsHex(("这是一个加盐前缀:QQ号码:" + event.getUserId()).getBytes()).substring(8, 24);
@@ -41,6 +41,7 @@ public class SPDNetGetKeyPlugin extends BotPlugin {
 				for (Account account1 : spdJSON.getAccounts()) {
 					//检查key
 					if (account1.getKey().equals(key)) {
+						mailSender.sendMail(event.getUserId()+"@qq.com",event.getPrivateSender().getNickname()+"，你的SPDNet key已送达！","你的SPDNet key是:\n"+key);
 						sendMsg = MsgUtils.builder().text(String.format("你的key是: " + "\n%s", key));
 						bot.sendPrivateMsg(event.getUserId(), sendMsg.build(), false);
 						return MESSAGE_IGNORE;
@@ -55,6 +56,45 @@ public class SPDNetGetKeyPlugin extends BotPlugin {
 				return MESSAGE_BLOCK;
 			}
 			bot.sendPrivateMsg(event.getUserId(), sendMsg.build(), false);
+		}
+		return MESSAGE_IGNORE;
+	}
+
+	@Override
+	public int onGroupMessage(@NotNull Bot bot, @NotNull GroupMessageEvent event) {
+		String message = event.getRawMessage().replace("\n", "");
+		//TODO 检查插件
+		if ("key查询".equals(message)) {
+
+			String key;
+			key = DigestUtils.md5DigestAsHex(("这是一个加盐前缀:QQ号码:" + event.getUserId()).getBytes()).substring(8, 24);
+
+			try {
+				//按照SPDJSON作为模板类读取config.json的数据
+				ObjectMapper objectMapper = new ObjectMapper();
+				SPDJSON spdJSON;
+				spdJSON = objectMapper.readValue(file, new TypeReference<SPDJSON>() {
+				});
+
+				//遍历寻找是否有相同key
+				for (Account account1 : spdJSON.getAccounts()) {
+					//检查key
+					if (account1.getKey().equals(key)) {
+						mailSender.sendMail(event.getUserId()+"@qq.com",event.getSender().getNickname()+"，你的SPDNet key已送达！","你的SPDNet key是:\n"+key);
+						sendMsg = MsgUtils.builder().text(String.format("你的key是: " + "\n%s", key));
+						bot.sendGroupMsg(event.getGroupId(), sendMsg.build(), false);
+						return MESSAGE_IGNORE;
+					}
+				}
+				sendMsg = MsgUtils.builder().at(event.getUserId()).text("你好像还没注册");
+
+			} catch (Exception e) {
+				e.printStackTrace();
+				sendMsg = MsgUtils.builder().text("你妈,出BUG了,快去控制台看看日志");
+				bot.sendGroupMsg(event.getGroupId(), sendMsg.build(), false);
+				return MESSAGE_BLOCK;
+			}
+			bot.sendGroupMsg(event.getGroupId(), sendMsg.build(), false);
 		}
 		return MESSAGE_IGNORE;
 	}
