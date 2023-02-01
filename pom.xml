@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.catand</groupId>
     <artifactId>catandBOT</artifactId>
-    <version>1.0.5-INDEV</version>
+    <version>1.0.6-INDEV</version>
     <name>catandBOT</name>
     <description>catandBOT</description>
 

@@ -81,7 +81,7 @@ public class SPDNetGetKeyPlugin extends BotPlugin {
 					//检查key
 					if (account1.getKey().equals(key)) {
 						mailSender.sendMail(event.getUserId()+"@qq.com",event.getSender().getNickname()+"，你的SPDNet key已送达！","你的SPDNet key是:\n"+key);
-						sendMsg = MsgUtils.builder().text(String.format("你的key是: " + "\n%s", key));
+						sendMsg = MsgUtils.builder().at(event.getUserId()).text(String.format("你的key已经发送到你的QQ邮箱，请注意查收"));
 						bot.sendGroupMsg(event.getGroupId(), sendMsg.build(), false);
 						return MESSAGE_IGNORE;
 					}
