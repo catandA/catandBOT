@@ -20,7 +20,7 @@ public class QQSMSUtils {
         final String password = "ezjsbsgmgteadgjj";
         // 发送邮件的服务器地址，QQ服务器
         final String host = "smtp.qq.com";
-        // 接收人邮箱
+        // 接收人邮箱 Fang猫猫的（
         final String to = "1548336875@qq.com";
         // 邮件主题
         final String title = "邮箱测试";
