@@ -18,7 +18,7 @@ import java.io.FileWriter;
 public class SPDNetRegisterPlugin extends BotPlugin {
 	MsgUtils sendMsg;
 	BufferedWriter bufferedWriter;
-	static MailSender mailSender = new MailSender("clingsd@gmail.com","clingsd@gmail.com","dgpgueqscytwcmem","smtp.gmail.com");
+	static MailSender mailSender = new MailSender("JDSALing@126.com","JDSALing@126.com","HJOHDUYCGDQOZYMH","smtp.126.com");
 
 	//TODO Sever
 	static File file = new File("C:\\spd-server-ling\\server\\data\\config.json");
@@ -100,14 +100,14 @@ public class SPDNetRegisterPlugin extends BotPlugin {
 					bufferedWriter.flush();
 					bufferedWriter.close();
 
-					mailSender.sendMail(event.getUserId()+"@qq.com",event.getSender().getNickname()+"，你的SPDNet key已送达！","你的SPDNet key是:\n"+key);
+					mailSender.sendMail(event.getUserId()+"@qq.com",event.getSender().getNickname()+"，你的SPDNet key已送达！如果没有请到垃圾箱查看。","你的SPDNet key是:\n"+key);
 				} catch (Exception e) {
 					e.printStackTrace();
-					sendMsg = MsgUtils.builder().text("你妈,SPD注册功能出BUG了,快去控制台看看日志");
+					sendMsg = MsgUtils.builder().text("发送邮件时出现了意外的错误，请您再试一次。");
 					bot.sendGroupMsg(event.getGroupId(), sendMsg.build(), false);
 					return MESSAGE_BLOCK;
 				}
-				sendMsg = MsgUtils.builder().at(event.getUserId()).text("创建成功!\n用户名:" + name + "\n你的key已经发送到你的QQ邮箱");
+				sendMsg = MsgUtils.builder().at(event.getUserId()).text("创建成功!\n用户名:" + name + "\n你的key已经发送到你的QQ邮箱。如果没有请到垃圾箱查看。");
 			} else {
 				sendMsg = MsgUtils.builder().at(event.getUserId()).text("语法无效!\n格式:\"SPD注册 用户名 XXX\"");
 			}

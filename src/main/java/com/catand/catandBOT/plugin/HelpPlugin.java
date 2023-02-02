@@ -13,7 +13,7 @@ public class HelpPlugin extends BotPlugin {
 	@Override
 	public int onGroupMessage(@NotNull Bot bot, @NotNull GroupMessageEvent event) {
 		if(event.getRawMessage().contains("帮助")||event.getRawMessage().contains("help")){
-			sendMsg = MsgUtils.builder().text("这是catand的机器人,当前版本：1.0.6-Patch4\n" +
+			sendMsg = MsgUtils.builder().text("这是catand的机器人,当前版本：1.0.6-Patch5\n" +
 					"-主要开发者：Catand\n-协同开发者：JDSALing\n" +
 					"-基于 Shiro \n-目前白咕咕所拥有的功能：\n" +
 					"==========常规功能==========\n" +

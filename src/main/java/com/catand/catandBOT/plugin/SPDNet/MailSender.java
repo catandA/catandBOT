@@ -1,7 +1,5 @@
 package com.catand.catandBOT.plugin.SPDNet;
 
-import com.sun.mail.util.MailSSLSocketFactory;
-
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
@@ -32,19 +30,19 @@ public class MailSender {
 	}
 
 	public void sendMail(String recipientMailAddress, String mailSubject, String mailContent) throws Exception {
-		// 使用Gmail邮箱时配置
+		// 使用126邮箱时配置
 		Properties prop = new Properties();
-		// 设置Gmail邮件服务器
-		prop.setProperty("mail.host", "smtp.gmail.com");
+		// 设置126邮件服务器
+		prop.setProperty("mail.host", "smtp.126.com");
 		// 邮件发送协议
 		prop.setProperty("mail.transport.protocol", "smtp");
 		// 需要验证用户名和密码
 		prop.setProperty("mail.smtp.auth", "true");
 		// 关于QQ邮箱，还要设置SSL加密，其他邮箱不需要
-		MailSSLSocketFactory sf = new MailSSLSocketFactory();
-		sf.setTrustAllHosts(true);
-		prop.put("mail.smtp.ssl.enable", "true");
-		prop.put("mail.smtp.ssl.socketFactory", sf);
+		//MailSSLSocketFactory sf = new MailSSLSocketFactory();
+		//sf.setTrustAllHosts(true);
+		//prop.put("mail.smtp.ssl.enable", "true");
+		//prop.put("mail.smtp.ssl.socketFactory", sf);
 
 		// 创建定义整个邮件程序所需的环境信息的 Session 对象，QQ才有，其他邮箱就不用了
 		Session session = Session.getDefaultInstance(prop, new Authenticator() {
