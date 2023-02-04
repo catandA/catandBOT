@@ -99,11 +99,18 @@ public class SPDNetRegisterPlugin extends BotPlugin {
 					bufferedWriter.write(objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(spdJSON));
 					bufferedWriter.flush();
 					bufferedWriter.close();
-
-					mailSender.sendMail(event.getUserId()+"@qq.com",event.getSender().getNickname()+"，你的SPDNet key已送达！如果没有请到垃圾箱查看。","你的SPDNet key是:\n"+key);
 				} catch (Exception e) {
 					e.printStackTrace();
-					sendMsg = MsgUtils.builder().text("发送邮件时出现了意外的错误，请您再试一次。");
+					sendMsg = MsgUtils.builder().text("你妈,SPD注册功能出BUG了,快去控制台看看日志");
+					bot.sendGroupMsg(event.getGroupId(), sendMsg.build(), false);
+					return MESSAGE_BLOCK;
+				}
+
+				try {
+					mailSender.sendMail(event.getUserId()+"@qq.com",event.getSender().getNickname()+"，你的SPDNet key已送达！如果没有请到垃圾箱查看。","你的SPDNet key是:\n"+key);
+				}catch (Exception e) {
+					e.printStackTrace();
+					sendMsg = MsgUtils.builder().text("发送邮件时出现了意外的错误，请您再试一次");
 					bot.sendGroupMsg(event.getGroupId(), sendMsg.build(), false);
 					return MESSAGE_BLOCK;
 				}

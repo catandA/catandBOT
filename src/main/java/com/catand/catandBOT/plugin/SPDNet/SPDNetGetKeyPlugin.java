@@ -41,7 +41,14 @@ public class SPDNetGetKeyPlugin extends BotPlugin {
 				for (Account account1 : spdJSON.getAccounts()) {
 					//检查key
 					if (account1.getKey().equals(key)) {
-						mailSender.sendMail(event.getUserId()+"@qq.com",event.getPrivateSender().getNickname()+"，你的SPDNet key已送达！","你的SPDNet key是:\n"+key);
+						try {
+							mailSender.sendMail(event.getUserId()+"@qq.com",event.getPrivateSender().getNickname()+"，你的SPDNet key已送达！","你的SPDNet key是:\n"+key);
+						}catch (Exception e) {
+							e.printStackTrace();
+							sendMsg = MsgUtils.builder().text("发送邮件时出现了意外的错误，请您再试一次");
+							bot.sendPrivateMsg(event.getUserId(), sendMsg.build(), false);
+							return MESSAGE_BLOCK;
+						}
 						sendMsg = MsgUtils.builder().text(String.format("你的key是: " + "\n%s", key));
 						bot.sendPrivateMsg(event.getUserId(), sendMsg.build(), false);
 						return MESSAGE_IGNORE;
@@ -51,7 +58,7 @@ public class SPDNetGetKeyPlugin extends BotPlugin {
 
 			} catch (Exception e) {
 				e.printStackTrace();
-				sendMsg = MsgUtils.builder().text("发送邮件时出现了意外的错误，请您再试一次。");
+				sendMsg = MsgUtils.builder().text("你妈,出BUG了,快去控制台看看日志");
 				bot.sendPrivateMsg(event.getUserId(), sendMsg.build(), false);
 				return MESSAGE_BLOCK;
 			}
@@ -80,7 +87,14 @@ public class SPDNetGetKeyPlugin extends BotPlugin {
 				for (Account account1 : spdJSON.getAccounts()) {
 					//检查key
 					if (account1.getKey().equals(key)) {
-						mailSender.sendMail(event.getUserId()+"@qq.com",event.getSender().getNickname()+"，你的SPDNet key已送达！","你的SPDNet key是:\n"+key);
+						try {
+							mailSender.sendMail(event.getUserId()+"@qq.com",event.getSender().getNickname()+"，你的SPDNet key已送达！","你的SPDNet key是:\n"+key);
+						}catch (Exception e) {
+							e.printStackTrace();
+							sendMsg = MsgUtils.builder().text("发送邮件时出现了意外的错误，请您再试一次");
+							bot.sendPrivateMsg(event.getUserId(), sendMsg.build(), false);
+							return MESSAGE_BLOCK;
+						}
 						sendMsg = MsgUtils.builder().at(event.getUserId()).text(String.format("你的key已经发送到你的QQ邮箱，请注意查收。如果您看不见邮件，很有可能在垃圾箱中。"));
 						bot.sendGroupMsg(event.getGroupId(), sendMsg.build(), false);
 						return MESSAGE_IGNORE;
